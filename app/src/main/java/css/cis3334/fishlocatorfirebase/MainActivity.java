@@ -1,5 +1,6 @@
 package css.cis3334.fishlocatorfirebase;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +10,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +23,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button buttonAdd, buttonDetails, buttonDelete;          // two button widgets
+    Button buttonAdd, buttonDetails, buttonDelete, buttonLogout;          // two button widgets
     ListView listViewFish;                                  // listview to display all the fish in the database
     ArrayAdapter<Fish> fishAdapter;
     List<Fish> fishList;
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference myFishDbRef;
     int positionSelected;
     Fish fishSelected;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,22 @@ public class MainActivity extends AppCompatActivity {
         setupAddButton();
         setupDetailButton();
         setupDeleteButton();
+
+        buttonLogout = (Button) findViewById(R.id.buttonSignOut);
+
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent returnIntent = getIntent();
+                returnIntent.putExtra("result", 0);
+                setResult(Activity.RESULT_OK, returnIntent);
+                Toast.makeText(MainActivity.this, "Sign-out Successful.",
+                        Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
     }
+
 
     private void setupFirebaseDataChange() {
         fishDataSource = new FishFirebaseData();
