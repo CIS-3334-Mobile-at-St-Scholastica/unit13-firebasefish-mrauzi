@@ -14,12 +14,13 @@ import java.util.List;
  */
 
 public class FishFirebaseData {
+    FirebaseDatabase database;
     DatabaseReference myFishDbRef;
     public static final String FishDataTag = "Fish Data";
 
     public DatabaseReference open()  {
         // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
         myFishDbRef = database.getReference(FishDataTag);
         return myFishDbRef;
     }

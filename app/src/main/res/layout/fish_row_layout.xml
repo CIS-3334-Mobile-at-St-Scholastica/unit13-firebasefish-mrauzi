@@ -20,4 +20,16 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/textViewDate" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewLatitude"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewLongitude"
+        android:layout_weight="1" />
 </LinearLayout>
